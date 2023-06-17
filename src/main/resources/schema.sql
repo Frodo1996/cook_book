@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS recipe(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(3500) NOT NULL,
+    preparation_time INT NOT NULL,
+    popularity INT NOT NULL,
+    category_id INT NOT NULL);
+
+CREATE TABLE IF NOT EXISTS category(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(25) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+    image VARCHAR(100) NOT NULL);

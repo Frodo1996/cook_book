@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(title='Kategoria - CookBook')}"></head>
+<body>
+<div th:replace="~{fragments :: simple-menu}"></div>
+<div class="content">
+  <h2>Dostępne kategorie:</h2>
+  <p th:each="category : ${categories}">
+    <a th:href="@{|/category?id=${category.id}|}" th:title = "|Przejdź do: ${category.name}|">
+      <button type="button" class="btn btn-outline-dark" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem;
+           --bs-btn-font-size: .85rem;" th:text="|*{category.name}|"></button></a>
+  </p>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

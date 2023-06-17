@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(title='CookBook')}"></head>
+<body>
+<div th:replace="~{fragments :: simple-menu}"></div>
+<div class="content">
+    <h2>Najnowsze przepisy</h2>
+    <p th:each="recipe : ${latest}">
+        <a th:href="@{|/recipe?id=${recipe.id}|}" th:title = "|Przejdź do: ${recipe.name}|">
+            <button type="button" class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem;
+           --bs-btn-font-size: .85rem;" th:text="|*{recipe.name} (*{recipe.popularity} lajków)|"></button></a></p>
+
+    <h2>Najpopularniejsze wśród użytkowników</h2>
+    <p th:each="recipe : ${mostPopularList}">
+        <a th:href="@{|/recipe?id=${recipe.id}|}" th:title = "|Przejdź do: ${recipe.name}|">
+            <button type="button" class="btn btn-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem;
+           --bs-btn-font-size: .85rem;" th:text="|*{recipe.name} (*{recipe.popularity} lajków)|"></button></a></p>
+
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
