@@ -1,0 +1,25 @@
+.body {
+    background-color: aliceblue;
+}
+
+.header, footer {
+    display: block;
+    text-align: center;
+    background-color: cornflowerblue;
+    max-width: 100%;
+    padding: 10px 10px 10px 10px;
+}
+
+h2, h3, h4, p, .category_picture {
+    text-align: center;
+}
+
+#category-button, #like-button {
+    display: block;
+    text-align: center;
+}
+
+.content, .form {
+    padding: 30px 30px 30px 30px;
+    max-width: 100%;
+}

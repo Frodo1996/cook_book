@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(title='Kategoria - CookBook')}"></head>
+<body>
+<div th:replace="~{fragments :: simple-menu}"></div>
+<div class="content" th:object="${category}">
+  <h2 th:text="*{name}">Nazwa kategorii</h2>
+  <div class="category_picture"><img th:src="@{|/images/*{image}|}" th:alt="*{name}" width="250px" class="cat_picture"></div>
+  <h3>Opis kategorii</h3><br/>
+  <p th:text="*{description}">Sposób przygotowania</p>
+</div>
+<div>
+  <h3>Przepisy z tej kategorii</h3><br/>
+  <p th:each="recipe : ${recipes}">
+    <a th:href="@{|/recipe?id=${recipe.id}|}" th:title = "|Przejdź do: ${recipe.name}|">
+      <button type="button" class="btn btn-outline-dark" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem;
+           --bs-btn-font-size: .85rem;" th:text="|*{recipe.name} (*{recipe.popularity} lajków)|"></button></a>
+    &nbsp
+    <a th:href="@{|/delete?id=${recipe.id}|}" title="Usuń">
+      <button type="button" class="btn btn-outline-danger"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .50rem;">&#9747;
+      </button>
+    </a> &nbsp;
+    <a th:href="@{|/edit?id=${recipe.id}|}"
+       title="Edytuj">
+      <button type="button" class="btn btn-outline-danger"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .50rem;">&#9998;
+      </button>
+    </a>
+  <p th:if="*{recipes.size() eq 0}">Brak przepisów w tej kategorii</p>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(title='Przepis - CookBook')}"></head>
+<body>
+<div th:replace="~{fragments :: simple-menu}"></div>
+
+<div class="content">
+  <h2 th:text="|${recipeDto.name} (Kategoria: ${categoryDto.name})|">Tytuł przepisu</h2><br/>
+  <h3>Sposób przygotowania</h3><br/>
+  <p th:text="${recipeDto.description}">Sposób przygotowania</p>
+  <h3>Czas na przygotowanie</h3><br/>
+  <p th:text="|${recipeDto.preparationTime} minut|">Czas w minutach</p>
+  <h3>Opcje modyfikacji przepisu</h3>
+  <p>
+    <a th:href="@{|/delete?id=${recipeDto.id}|}" title="Usuń">
+    <button type="button" class="btn btn-outline-danger"
+            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .50rem;">&#9747;
+    </button>
+  </a> &nbsp;
+    <a th:href="@{|/edit?id=${recipeDto.id}|}" title="Edytuj">
+      <button type="button" class="btn btn-outline-danger"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .50rem;">&#9998;
+      </button>
+    </a>
+  </p>
+  <h3>Przepis okazał się przydatny i smaczny? Zostaw kciuka w górę!</h3><br/>
+  <p>
+    <a th:href="@{/like(id=${recipeDto.id})}" id="recipe-button">
+    <button type="button" class="btn btn-dark" th:text="|Lubię to (&#128077; ${recipeDto.popularity})|">
+      Like button
+    </button>
+  </a>
+  </p><br/>
+  <p><a th:href="@{/category(id= ${recipeDto.category.id})}" id="category-button">
+    <button type="button" class="btn btn-dark" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem;
+         --bs-btn-font-size: .75rem;" th:text="|Więcej z kategorii: ${categoryDto.name}|">
+      Kategoria</button></a></p><br/>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
