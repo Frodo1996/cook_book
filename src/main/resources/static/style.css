@@ -14,7 +14,7 @@ h2, h3, h4, p, .category_picture {
     text-align: center;
 }
 
-#category-button, #like-button {
+#category-button, #like-button,.add_user {
     display: block;
     text-align: center;
 }
