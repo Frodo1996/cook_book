@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(title='CookBook')}"></head>
+<body>
+<div th:replace="~{fragments :: simple-menu}"></div>
+<h3>Lista wszystkich użytkowników:</h3>
+<table class="table table-striped" style="text-align: center">
+    <thead>
+    <tr>
+        <th scope="col">Imię</th>
+        <th scope="col">Nazwisko</th>
+        <th scope="col">Data urodzenia</th>
+        <th scope="col">Email</th>
+        <th scope="col">Newsletter</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.dateOfBirth}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.assignedToNewsletter}"></td>
+    </tr>
+    </tbody>
+</table>
+<form action="/users" method="post" th:object="${user}">
+    <h3>Dodaj nowego użytkownika</h3>
+    <input type="hidden" th:field="*{id}">
+    <div class="mb-3" style="margin-left: 60px; margin-right: 60px">
+        <label for="firstName" class="form-label">Imię</label>
+        <input type="text" class="form-control" id="firstName" th:field="*{firstName}">
+    </div>
+    <div class="mb-3" style="margin-left: 60px; margin-right: 60px">
+        <label for="lastName" class="form-label">Nazwisko</label>
+        <input type="text" class="form-control" id="lastName" th:field="*{lastName}">
+    </div>
+    <div class="mb-3" style="margin-left: 60px; margin-right: 60px">
+        <label for="dateOfBirth" class="form-label">Data urodzenia (yyyy-MM-dd)</label>
+        <input type="text" class="form-control" id="dateOfBirth" th:field="*{dateOfBirth}">
+    </div>
+    <div class="mb-3" style="margin-left: 60px; margin-right: 60px">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email" th:field="*{email}">
+    </div>
+<!--    <input style="text-align: center" type="submit" th:value="|Dodaj użytkownika|"/>-->
+    <div class="add_user">
+    <button style="margin-bottom: 15px" type="submit" class="btn btn-success">Zatwierdź</button>
+    </div>
+</form>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

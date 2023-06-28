@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(title='Formularz - CookBook')}"></head>
+<body>
+<div th:replace="~{fragments :: simple-menu}"></div>
+<div class="content">
+  <form method="POST" th:action="@{/modify}" class="form-group" th:object="${recipe}">
+    <h2 th:if="*{id eq null}">Dodaj przepis</h2>
+    <h2 th:unless="*{id eq null}">Edytuj przepis</h2>
+    <div class="mb-3">
+      <input type="hidden" th:field="*{id}" class="form-control" id="id" required>
+
+      <label for="name" class="form-label">Nazwa przepisu</label>
+      <input type="text" th:field="*{name}" maxlength="255" class="form-control" id="name" name="name" placeholder="Nazwa przepisu" required><br/>
+
+      <label for="description" class="form-label">Sposób przygotowania</label>
+      <input type="text" th:field="*{description}" maxlength="1000" class="form-control" name="description" id="description" placeholder="Sposób przygotowania" required><br/>
+
+      <label for="timeNeeded" class="form-label">Potrzebny czas (min) </label>
+      <input type="text" th:field="*{preparationTime}" maxlength="1000" class="form-control" name="timeNeeded" id="timeNeeded" placeholder="Czas przygotowania" required><br/>
+
+      <br/>
+      <label class="form-control"> Kategoria
+        <select name="categoryId"  th:field="*{category.id}">
+          <option selected disabled value="">Wybierz kategorię...</option>
+          <option id="category" th:each="category : ${categories}"
+                  th:value="${category.id}" th:text="${category.name}">Category name</option>
+        </select>
+      </label>
+      <br/>
+      <input type="hidden" th:field="*{popularity}" class="form-control" id="popularity" required>
+
+      <div class="d-grid gap-2">
+        <button th:if="*{id eq null}" type="submit" class="btn btn-dark">Dodaj</button>
+        <button th:unless="*{id eq null}" type="submit" class="btn btn-dark">Zakończ edycję</button>
+      </div>
+    </div>
+  </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
